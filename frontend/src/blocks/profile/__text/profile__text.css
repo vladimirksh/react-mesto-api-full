@@ -1,0 +1,10 @@
+.profile__text {
+  display: flex;
+}
+
+@media screen and (max-width: 320px) {
+  .profile__text {
+    position: relative;
+    left: 15px;
+  }
+}

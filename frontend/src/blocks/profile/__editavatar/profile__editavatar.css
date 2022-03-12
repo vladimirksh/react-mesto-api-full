@@ -1,0 +1,21 @@
+.profile__editavatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  outline: none;
+}
+
+.profile__editavatar:hover {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-image: url(../../../images/EditButton_Avatar.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: 1s ease;
+}

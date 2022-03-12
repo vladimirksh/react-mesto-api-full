@@ -1,0 +1,13 @@
+.register__input {
+  outline: none;
+  border: none;
+  background-color: #000;
+  border-bottom: 2px solid rgb(80%, 80%, 80%);
+  font-family: "Inter", "Arial", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgb(80%, 80%, 80%);
+  min-height: 27px;
+}

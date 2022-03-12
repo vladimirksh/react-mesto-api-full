@@ -1,0 +1,11 @@
+.element__signature {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 246px;
+  margin: 0 auto;
+  padding: 23px 0 23px;
+}

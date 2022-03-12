@@ -1,0 +1,23 @@
+.register__field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.register__field:first-of-type {
+  margin: 50px 0 30px;
+}
+
+.register__field:last-of-type {
+  margin-bottom: 216px;
+}
+
+@media screen and (max-width: 425px) {
+  .register__field:first-of-type {
+    margin: 40px 0 30px;
+  }
+  .register__field:last-of-type {
+    margin-bottom: 173px;
+  }
+}
