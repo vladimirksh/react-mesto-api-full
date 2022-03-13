@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 
 const { errors, celebrate, Joi } = require('celebrate');
 
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 const app = express();
 
 const { NotFoundError } = require('./errors');
@@ -34,6 +36,8 @@ async function main() {
   console.log(`Listen ${PORT} port`);
 }
 
+app.use(requestLogger); // подключаем логгер запросов
+
 // роуты, не требующие авторизации
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -48,7 +52,7 @@ app.post('/signup', celebrate({
     password: Joi.string().required(),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-    avatar: Joi.string().required().regex(/^(https?:\/\/)?([\da-z.-]+).([a-z.]{2,6})([/\w.-]*)*\/?$/),
+    avatar: Joi.string().regex(/^(https?:\/\/)?([\da-z.-]+).([a-z.]{2,6})([/\w.-]*)*\/?$/),
   }),
 }), createUser);
 
@@ -63,8 +67,10 @@ app.use((req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
 });
 
+app.use(errorLogger); // подключаем логгер ошибок
+
 app.use(errors()); // обработчик ошибок celebrate
 
-app.use(errorHandler); // ыцентрализованный обработчик
+app.use(errorHandler); // централизованный обработчик
 
 main();
