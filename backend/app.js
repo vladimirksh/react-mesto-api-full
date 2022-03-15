@@ -40,6 +40,13 @@ async function main() {
 
 app.use(requestLogger); // подключаем логгер запросов
 
+// Краш-тест сервера
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 // роуты, не требующие авторизации
 app.post('/signin', celebrate({
   body: Joi.object().keys({
