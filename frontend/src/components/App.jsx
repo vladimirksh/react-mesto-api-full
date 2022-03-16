@@ -88,9 +88,6 @@ function App() {
           .then((values) => {
             setCurrentUser(values[0]);
             setCards(values[1]);
-            values
-              ? setIsLoadingInitialData(true)
-              : setIsLoadingInitialData(false);
           })
           .catch((err) => {
             //попадаем сюда если один из промисов завершаться ошибкой
