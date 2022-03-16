@@ -30,6 +30,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [message, setMessage] = useState(false);
+  const [isLoadingInitialData, setIsLoadingInitialData] = useState(false);
   const history = useHistory();
 
   //состояния для логина и пароля
@@ -75,6 +76,9 @@ function App() {
   useEffect(() => {
     handleTokenCheck()
       .then(() => {
+        if (loggedIn) {
+          setIsLoadingInitialData(true);
+        }
         // все хорошо, токен актуальный, можно делать запрос на получение данных
         Promise.all([
           //в Promise.all передаем массив промисов которые нужно выполнить
@@ -84,10 +88,16 @@ function App() {
           .then((values) => {
             setCurrentUser(values[0]);
             setCards(values[1]);
+            values
+              ? setIsLoadingInitialData(true)
+              : setIsLoadingInitialData(false);
           })
           .catch((err) => {
             //попадаем сюда если один из промисов завершаться ошибкой
             console.log(err);
+          })
+          .finally(() => {
+            setIsLoadingInitialData(false);
           });
       })
       .catch((err) => {
@@ -182,7 +192,6 @@ function App() {
   function handleRegister(password, email) {
     register(password, email)
       .then((data) => {
-        console.log(data);
         setIsInfoTooltipOpen(true);
         if (data) {
           setMessage(true);
@@ -249,6 +258,7 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
             component={Main}
+            isLoadingInitialData={isLoadingInitialData}
           />
 
           <Route path="/sign-up">
